@@ -37,3 +37,4 @@
 | 2026-11-10 | Google Drive、workflow.md | 「スマホ用（Googleドキュメント）」フォルダを作り、ルール7件と記事No.01の本文をGoogleドキュメント形式で保存。今後のルール更新時も差し替える | Driveアプリで.mdを開けなかったため | 発信者 |
 | 2026-11-10 | rules/account_profile.md、rules/metrics.md、README.md | Threadsを2026-11-11から開始（1日5投稿）。ただしnote記事とnoteプロフィールではThreadsに触れない（選択肢A）。指標10の作業時間基準を更新 | 人の指示 | 発信者 |
 | 2026-11-10 | drafts/images/ | noteプロフィールのアイコン（800×800px）とヘッダー（1280×670px）を、Museの画像から切り抜いて作成 | 人が画像を共有 | ― |
+| 2026-11-10 | drafts/images/ | noteアイコンの第2版（案3：やわらかいイラスト、後ろ姿）を800×800pxで作成 | 人が画像を共有 | ― |
