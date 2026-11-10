@@ -35,3 +35,4 @@
 | 2026-11-10 | drafts/images/ | 画像①（切り抜き）、②④（Claudeが作図）を追加。画像5点すべて完成 | 人の依頼 | ― |
 | 2026-11-10 | drafts/ | 記事No.01の公開直前チェックリストを作成（承認2） | ― | 承認2待ち |
 | 2026-11-10 | Google Drive、workflow.md | 「スマホ用（Googleドキュメント）」フォルダを作り、ルール7件と記事No.01の本文をGoogleドキュメント形式で保存。今後のルール更新時も差し替える | Driveアプリで.mdを開けなかったため | 発信者 |
+| 2026-11-10 | rules/account_profile.md、rules/metrics.md、README.md | Threadsを2026-11-11から開始（1日5投稿）。ただしnote記事とnoteプロフィールではThreadsに触れない（選択肢A）。指標10の作業時間基準を更新 | 人の指示 | 発信者 |
