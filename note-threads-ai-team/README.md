@@ -33,6 +33,13 @@
 note-threads-ai-team/
 ├── README.md        … このファイル
 ├── rules/           … 運用ルール（Claudeが更新を提案し、人が承認する）
-│   └── account_profile.md … アカウントの前提、目標、ジャンル
+│   ├── account_profile.md … 前提、目標、ジャンル、リストの受け皿、作業時間、投稿頻度
+│   ├── tone.md            … トーンと構成（一部承認待ち）
+│   ├── ng_expressions.md  … 使ってはいけない表現（8項目）
+│   ├── ng_planning.md     … 企画のNG条件（8項目）
+│   ├── metrics.md         … 記録する指標と共有ルール
+│   └── approvals.md       … 承認ポイント（2か所＋ルール変更は随時）
 └── CHANGELOG.md     … 変更履歴
 ```
+
+保存先：GitHub（ブランチ claude/gifted-brahmagupta-8n55gn）と Google Drive（note-threads-ai-team フォルダ）の両方。
