@@ -49,3 +49,4 @@
 | 2026-11-12 | templates/metrics_log.md、rules/account_profile.md | 記事No.01のURLとnoteアカウントのURLを記録 | 人の報告 | ― |
 | 2026-11-12 | drafts/ | 記事No.02の初稿（貼り付け用テキスト）と記事パッケージを作成。承認1待ち | 人の依頼（A） | 承認1待ち |
 | 2026-11-12 | team/03_writing.md、team/06_publishing.md、rules/approvals.md、templates/prepublish_checklist.md | 記事No.01の反省を反映：原稿はnote貼り付け用テキストを正本に（表なし）、見出しの設定手順、第三者の確認（任意）、チェック項目4つ追加 | 承認（C全部OK） | 発信者 |
+| 2026-11-12 | drafts/images/ | 記事No.02の見出し画像（Muse作成）を1280×670pxに切り抜き。アイコンが下端で切れないよう、下に余白を足した | 人が画像を共有 | ― |
