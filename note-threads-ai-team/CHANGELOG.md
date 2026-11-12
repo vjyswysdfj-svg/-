@@ -47,3 +47,4 @@
 | 2026-11-12 | drafts/ | 記事No.01の承認2完了（無料公開、Muse規約確認済み、ハッシュタグ6個） | 人の判断 | 発信者 |
 | 2026-11-12 | templates/metrics_log.md | 記事No.01を公開（無料）。記録表に1行目を追加 | 人の報告 | ― |
 | 2026-11-12 | templates/metrics_log.md、rules/account_profile.md | 記事No.01のURLとnoteアカウントのURLを記録 | 人の報告 | ― |
+| 2026-11-12 | drafts/ | 記事No.02の初稿（貼り付け用テキスト）と記事パッケージを作成。承認1待ち | 人の依頼（A） | 承認1待ち |
