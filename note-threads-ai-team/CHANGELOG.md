@@ -46,3 +46,4 @@
 | 2026-11-12 | drafts/images/ | 記事No.01の見出し画像を新タイトルで差し替え（Muse作成→1280×670pxに切り抜き、文字の誤りなし） | 人が画像を共有 | ― |
 | 2026-11-12 | drafts/ | 記事No.01の承認2完了（無料公開、Muse規約確認済み、ハッシュタグ6個） | 人の判断 | 発信者 |
 | 2026-11-12 | templates/metrics_log.md | 記事No.01を公開（無料）。記録表に1行目を追加 | 人の報告 | ― |
+| 2026-11-12 | templates/metrics_log.md、rules/account_profile.md | 記事No.01のURLとnoteアカウントのURLを記録 | 人の報告 | ― |
