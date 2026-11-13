@@ -63,3 +63,4 @@
 | 2026-11-13 | team/05_production.md、drafts/ | Museの正式名称を「Muse from Meta」（Meta Platforms, Inc.）と確認し記録。1本目の振り返りの下書きをNo.04に移動、本文のMuseの説明を修正 | 本人のApp Store画面 | ― |
 | 2026-11-13 | drafts/ | 記事No.03（5つのAIで見出し画像を比較）の初稿、比較図、記事パッケージを作成。承認1待ち | ― | 承認1待ち |
 | 2026-11-13 | templates/metrics_log.md | 記事No.02を公開（無料）。記録表に追加 | 人の報告 | ― |
+| 2026-11-13 | templates/metrics_log.md | 記事No.03を公開（無料、作業約45分）。記録表に追加 | 人の報告 | ― |
