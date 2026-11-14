@@ -71,3 +71,4 @@
 | 2026-11-14 | templates/metrics_log.md、drafts/ | 記事No.02の公開タイトルを「…8選」と記録（本人が意図して変更） | 本人の回答 | 発信者 |
 | 2026-11-14 | templates/metrics_log.md | 3本のアクセス状況（09:43集計）を記録 | 人の共有 | ― |
 | 2026-11-14 | drafts/ | 記事No.05（プロフィールをAIと作った話）の初稿、比較図、記事パッケージを作成 | ― | 承認1待ち |
+| 2026-11-14 | rules/account_profile.md、templates/prepublish_checklist.md | マガジン「ゼロからAIとnoteを始めた実録」を作成。公開後にマガジンへ追加する項目をチェックリストに追加 | 人の作業 | 発信者 |
