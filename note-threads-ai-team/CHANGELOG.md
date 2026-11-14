@@ -68,3 +68,4 @@
 | 2026-11-14 | rules/account_profile.md、README.md、workflow.md | noteの投稿頻度を週2本から週3本に変更（11/26ごろに見直し） | 本人の承認 | 発信者 |
 | 2026-11-14 | templates/metrics_log.md | プロフィール画面の数字を記録（フォロワー1、スキ No.01:7／No.02:2／No.03:2） | 人の共有 | ― |
 | 2026-11-14 | rules/account_profile.md、templates/metrics_log.md | 自己紹介を「フォロワー0人から始めた過程を」に更新（本人がnoteで修正済み）。10:35時点でフォロワー2、スキ No.02:3／No.03:3 | 人の共有 | 発信者 |
+| 2026-11-14 | templates/metrics_log.md、drafts/ | 記事No.02の公開タイトルを「…8選」と記録（本人が意図して変更） | 本人の回答 | 発信者 |
