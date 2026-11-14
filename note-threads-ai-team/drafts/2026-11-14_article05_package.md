@@ -1,6 +1,6 @@
 # 記事パッケージ No.05（承認1の提出物）
 
-本文：drafts/2026-11-14_article05_note_paste.txt（約1,800字）／画像①：images/article05_fig1_profile.png（アイコン・ヘッダーの最初と今の比較、Claude作成）
+本文：drafts/2026-11-14_article05_note_paste.txt（約3,300字に増量。旧版はnotes/article05_v1_1800.txt）／画像①：images/article05_fig1_profile.png（アイコン・ヘッダーの最初と今の比較、Claude作成）
 
 ## 0. 概要
 | 項目 | 内容 |
