@@ -11,3 +11,5 @@
 | 5 | templates/prepublish_checklist.md | 公開直前チェックリスト（新規） | 済（2026-11-14 01:43 JST） |
 
 記録日：2026-11-13（Drive・Canvaの接続が502エラーで失敗）
+
+- 2026-11-16 08:46 JST：【記事No.05 公開版】を保存（ID 1Kj-CZwsdG-Dp93T1VHq_USNPayKinCIibVEdHwxr9uY）。11/15保存の版は「（古い版）」に名前変更
