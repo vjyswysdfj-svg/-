@@ -83,3 +83,4 @@
 | 2026-11-18 | drafts/notes/topic_stock.md | No.07〜12のネタと公開日を決定（11/23〜11/30） | 本人の承認 | ― |
 | 2026-11-18 | rules/tone.md、templates/prepublish_checklist.md | note記事は毎回3,000字以上（本人決定） | 本人の判断 | ― |
 | 2026-11-18 | 作業環境のネットワーク設定 | chatgpt.com、gemini.google.com、g.co、www.perplexity.ai、manus.im、help.manus.im を許可（本人の希望） | 本人の承認 | ― |
+| 2026-11-18 | drafts/ | No.07「同じ質問で5つのAIに「次に書くネタ」を聞いてみた」を公開 | 本人 | ― |
