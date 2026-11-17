@@ -81,3 +81,4 @@
 | 2026-11-18 | rules/account_profile.md | 本人の背景（整備・営業・バイク経験、Instagram運用、GAS＋OpenAIの仕組み、副業目標）を追記 | 本人の共有 | ― |
 | 2026-11-18 | rules/account_profile.md | Instagramは伸び悩みのため、noteを中心にする（本人決定） | 本人の判断 | ― |
 | 2026-11-18 | drafts/notes/topic_stock.md | No.07〜12のネタと公開日を決定（11/23〜11/30） | 本人の承認 | ― |
+| 2026-11-18 | rules/tone.md、templates/prepublish_checklist.md | note記事は毎回3,000字以上（本人決定） | 本人の判断 | ― |
