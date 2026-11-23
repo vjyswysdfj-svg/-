@@ -1,0 +1,154 @@
+<title>中古車チェックリスト</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+/* Layout: 1カラムの点検表。上に進み具合、区分ごとに折りたためる点検項目。お店でスマホ片手に使う前提 */
+:root{
+  --bg:#f3f5f7; --surface:#ffffff; --ink:#1c2533; --muted:#5d6878; --line:#d9dfe6;
+  --navy:#1e3460; --teal:#1a8f94; --teal-soft:#e2f2f2; --warn:#b4541f; --warn-soft:#fbeee6;
+  --display:"Zen Kaku Gothic New","Noto Sans JP","Hiragino Sans",sans-serif;
+  --body:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11161e; --surface:#19212c; --ink:#e7ecf2; --muted:#9aa6b6; --line:#2c3746;
+  --navy:#8fb0e8; --teal:#4cc3c8; --teal-soft:#16343a; --warn:#f0a070; --warn-soft:#3a2419; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11161e; --surface:#19212c; --ink:#e7ecf2; --muted:#9aa6b6; --line:#2c3746;
+  --navy:#8fb0e8; --teal:#4cc3c8; --teal-soft:#16343a; --warn:#f0a070; --warn-soft:#3a2419; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+header h1{font-family:var(--display);font-size:1.7rem;line-height:1.3;margin:0;color:var(--navy);text-wrap:balance}
+header p{margin:6px 0 0;color:var(--muted);font-size:.95rem}
+.tag{display:inline-block;font-size:.75rem;letter-spacing:.06em;background:var(--warn-soft);color:var(--warn);padding:2px 10px;border-radius:999px;font-weight:700}
+.progress{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.progress-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.count{font-variant-numeric:tabular-nums;font-weight:700}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--teal);width:0;transition:width .25s}
+.opts{display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
+.opts label{display:flex;align-items:center;gap:6px;cursor:pointer}
+section{display:flex;flex-direction:column;gap:10px}
+section h2{font-family:var(--display);font-size:1.15rem;margin:8px 0 0;color:var(--navy);display:flex;justify-content:space-between;align-items:baseline}
+section h2 small{font-family:var(--body);font-weight:500;font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.item.done{border-color:var(--teal)}
+.head{display:flex;align-items:flex-start;gap:12px;padding:14px}
+.head input{width:26px;height:26px;margin:2px 0 0;accent-color:var(--teal);flex:none}
+.head .t{flex:1;min-width:0}
+.head .t b{display:block;font-size:1.02rem}
+.head .t span{font-size:.85rem;color:var(--muted)}
+.more{background:none;border:1px solid var(--line);color:var(--navy);border-radius:8px;padding:4px 10px;font:inherit;font-size:.8rem;cursor:pointer;flex:none}
+.more:focus-visible,.head input:focus-visible,button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.body{padding:0 14px 14px 52px;display:flex;flex-direction:column;gap:8px;font-size:.93rem}
+.body dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px}
+.body dt{font-weight:700;color:var(--teal)}
+.body dd{margin:0;min-width:0}
+.todo{font-size:.82rem;color:var(--warn);background:var(--warn-soft);border-radius:6px;padding:4px 8px;align-self:flex-start}
+.note{background:var(--teal-soft);border-radius:12px;padding:14px;font-size:.9rem}
+.note b{color:var(--navy)}
+.reset{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.reset button{font:inherit;border-radius:8px;padding:8px 14px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.reset .yes{background:var(--warn);border-color:var(--warn);color:#fff}
+footer{font-size:.8rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="tag">試作品・項目は追加中</span>
+    <h1>中古車を買う前のチェックリスト</h1>
+    <p>自動車整備を3年経験した作者が、中古車を見るときに実際に確かめているところをまとめました。家で読んで準備して、お店ではチェックを入れながら使えます。</p>
+  </header>
+
+  <div class="progress" aria-live="polite">
+    <div class="progress-row">
+      <span>チェック済み <span class="count" id="count">0 / 0</span></span>
+      <div class="opts">
+        <label><input type="checkbox" id="opt-hv"> ハイブリッド車</label>
+        <label><input type="checkbox" id="opt-loan"> ローンで買う</label>
+      </div>
+    </div>
+    <div class="bar"><span id="bar"></span></div>
+  </div>
+
+  <div class="note"><b>車によって、見るところは変わります。</b>ハイブリッド車やローンで買う場合は、上のチェックを入れると、その項目が出てきます。</div>
+
+  <div id="list"></div>
+
+  <div class="note"><b>分からないときは、お店の人に聞くのが一番です。</b>このチェックリストは判断の手がかりです。安全に関わる部分は、最後はお店や整備士に確かめてください。</div>
+
+  <div class="reset">
+    <button id="reset" type="button">チェックを全部外す</button>
+    <span id="confirm" hidden>本当に外しますか？ <button id="reset-yes" class="yes" type="button">外す</button> <button id="reset-no" type="button">やめる</button></span>
+  </div>
+  <footer>チェックの状態は、このスマホのブラウザだけに保存されます。</footer>
+</div>
+
+<script>
+const DATA=[
+ {sec:"書類・お店に聞くこと",items:[
+  {id:"shufuku",t:"修復歴の有無",s:"事故で直したことがあるか",why:"見た目がきれいでも、事故で直した車は、ほかの車と状態が違うことがあるため",how:"車両検査証明書（鑑定書）が車にあれば、「修復歴」の欄を見る。なければ、お店の人に聞く"},
+  {id:"shaken",t:"車検の有無",s:"車検が残っているか",why:"",how:"車検が残っているかを、お店に確かめる",todo:true},
+  {id:"kinri",t:"金利",s:"ローンで買うとき",loan:true,why:"",how:"ローンで買うときは、金利を必ず確かめる",todo:true},
+  {id:"hvbat",t:"HVバッテリーの交換履歴",s:"ハイブリッド車のとき",hv:true,why:"",how:"交換していれば、交換履歴の証明書があるはず。見せてもらう",todo:true},
+  {id:"shomo",t:"消耗品",s:"交換が近い部品がないか",why:"",how:"",todo:true}
+ ]},
+ {sec:"外まわり",items:[
+  {id:"tosou",t:"塗装し直されたところ",s:"修復歴とあわせて見る",why:"塗装し直したところは、そこを直したしるしのことがあるため",how:"車両検査証明書があれば、車体の図に付いている記号を見る。分からなければ、お店の人に聞く"},
+  {id:"tire",t:"タイヤの製造年",s:"溝の深さとあわせて",why:"古いタイヤは、溝が残っていても、ゴムが硬くなっていたり、ヒビが大きかったりするため",how:"タイヤの製造年を見る。古ければ、ゴムの硬さとヒビを確かめる"},
+  {id:"custom",t:"カスタムパーツの場所",s:"元の部品から変えているところ",why:"",how:"",todo:true}
+ ]},
+ {sec:"車の中",items:[
+  {id:"smoke",t:"禁煙車か",s:"",why:"",how:"禁煙車かどうかを確かめる",todo:true},
+  {id:"navi",t:"ナビ",s:"取り外し専用のボルト",why:"",how:"トヨタなどの車なら、ナビを取り外すための専用のボルトがあるかを確かめる",todo:true}
+ ]},
+ {sec:"下回り",items:[
+  {id:"sabi",t:"下回りのサビ・腐食",s:"マフラーやアーム類",why:"雪国や海沿いを走っていた車は、下回りのサビが多い傾向があるため",how:"マフラーの排気漏れや、アーム類の腐食がないかを見る"},
+  {id:"kankyo",t:"走っていた環境",s:"走行距離だけで判断しない",why:"街中で走らずに暖気（アイドリング）ばかりしていた車は、距離が短くても劣化がひどい場合があるため",how:"走行距離だけで決めず、どんな使われ方をしていたかを、お店に聞いたり、下回りの状態と合わせて考えたりする"}
+ ]}
+];
+const KEY="usedcar-checklist-v1";
+let st={checked:{},hv:false,loan:false,open:{}};
+try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s)st=Object.assign(st,s);}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+const list=document.getElementById("list");
+function visible(it){return (!it.hv||st.hv)&&(!it.loan||st.loan);}
+function render(){
+  list.innerHTML="";let total=0,done=0;
+  DATA.forEach(g=>{
+    const its=g.items.filter(visible);if(!its.length)return;
+    const sec=document.createElement("section");
+    const d=its.filter(i=>st.checked[i.id]).length;total+=its.length;done+=d;
+    sec.innerHTML=`<h2>${g.sec}<small>${d} / ${its.length}</small></h2>`;
+    its.forEach(it=>{
+      const el=document.createElement("div");el.className="item"+(st.checked[it.id]?" done":"");
+      const open=!!st.open[it.id];
+      el.innerHTML=`<div class="head"><input type="checkbox" id="c-${it.id}" ${st.checked[it.id]?"checked":""} aria-label="${it.t}">
+        <label class="t" for="c-${it.id}"><b>${it.t}</b>${it.s?`<span>${it.s}</span>`:""}</label>
+        <button class="more" type="button" aria-expanded="${open}">${open?"閉じる":"見方"}</button></div>
+        <div class="body" ${open?"":"hidden"}>
+          ${(it.why||it.how)?`<dl>${it.why?`<dt>なぜ</dt><dd>${it.why}</dd>`:""}${it.how?`<dt>どう</dt><dd>${it.how}</dd>`:""}</dl>`:""}
+          ${it.todo?`<span class="todo">くわしい見方は、これから追加します</span>`:""}
+        </div>`;
+      el.querySelector("input").addEventListener("change",e=>{st.checked[it.id]=e.target.checked;save();render();});
+      el.querySelector(".more").addEventListener("click",()=>{st.open[it.id]=!open;save();render();});
+      sec.appendChild(el);
+    });
+    list.appendChild(sec);
+  });
+  document.getElementById("count").textContent=`${done} / ${total}`;
+  document.getElementById("bar").style.width=total?`${done/total*100}%`:"0";
+}
+const hv=document.getElementById("opt-hv"),loan=document.getElementById("opt-loan");
+hv.checked=st.hv;loan.checked=st.loan;
+hv.addEventListener("change",()=>{st.hv=hv.checked;save();render();});
+loan.addEventListener("change",()=>{st.loan=loan.checked;save();render();});
+const cf=document.getElementById("confirm");
+document.getElementById("reset").addEventListener("click",()=>{cf.hidden=false;});
+document.getElementById("reset-no").addEventListener("click",()=>{cf.hidden=true;});
+document.getElementById("reset-yes").addEventListener("click",()=>{st.checked={};save();cf.hidden=true;render();});
+render();
+</script>
