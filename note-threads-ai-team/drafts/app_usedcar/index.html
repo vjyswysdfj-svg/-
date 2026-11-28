@@ -60,6 +60,23 @@ section h2 small{font-family:var(--body);font-weight:500;font-size:.85rem;color:
 .mini th{color:var(--muted);font-weight:500}
 .mini td:first-child{font-weight:700;width:38%}
 .mini-s{margin:6px 0 0;color:var(--muted);font-size:.78rem}
+.steps{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.steps h2{font-family:var(--display);font-size:1.05rem;margin:0;color:var(--navy)}
+.steps ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.steps li{display:flex;gap:10px;align-items:flex-start;font-size:.92rem}
+.steps .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;display:grid;place-items:center;font-size:.85rem}
+.steps a{color:var(--teal);font-weight:700}
+.term{font:inherit;color:inherit;background:none;border:0;padding:0;border-bottom:2px dotted var(--teal);cursor:pointer}
+.defbox{background:var(--teal-soft);border-radius:8px;padding:8px 10px;font-size:.88rem}
+.defbox b{color:var(--navy)}
+.ask{display:flex;flex-direction:column;gap:10px;scroll-margin-top:120px}
+.ask h2{font-family:var(--display);font-size:1.15rem;margin:8px 0 0;color:var(--navy)}
+.ask p{margin:0;font-size:.9rem;color:var(--muted)}
+.ask h3{font-size:.95rem;margin:6px 0 0;color:var(--teal)}
+.ask ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.ask li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.ask li b{display:block;font-size:1rem}
+.ask li span{font-size:.82rem;color:var(--muted)}
 .todo{font-size:.82rem;color:var(--warn);background:var(--warn-soft);border-radius:6px;padding:4px 8px;align-self:flex-start}
 .note{background:var(--teal-soft);border-radius:12px;padding:14px;font-size:.9rem}
 .note b{color:var(--navy)}
@@ -77,6 +94,16 @@ footer{font-size:.8rem;color:var(--muted)}
     <p>自動車整備を3年経験した作者が、中古車を見るときに実際に確かめているところをまとめました。家で読んで準備して、お店ではチェックを入れながら使えます。</p>
   </header>
 
+  <div class="steps">
+    <h2>使い方</h2>
+    <ol>
+      <li><span class="n">1</span><span><b>家で読む：</b>各項目の「見方」を押して、なぜ見るか・どう見るかを読んでおく</span></li>
+      <li><span class="n">2</span><span><b>お店でチェック：</b>見たところに✓を入れる</span></li>
+      <li><span class="n">3</span><span><b>気になったら聞く：</b><a href="#ask">お店で聞くこと</a>を、そのまま読めばOK</span></li>
+    </ol>
+    <span style="font-size:.85rem;color:var(--muted)"><span class="term" style="cursor:default">点線の付いた言葉</span>は、押すと説明が出ます</span>
+  </div>
+
   <div class="progress" aria-live="polite">
     <div class="progress-row">
       <span>チェック済み <span class="count" id="count">0 / 0</span></span>
@@ -91,6 +118,12 @@ footer{font-size:.8rem;color:var(--muted)}
   <div class="note"><b>車によって、見るところは変わります。</b>ハイブリッド車やローンで買う場合は、上のチェックを入れると、その項目が出てきます。</div>
 
   <div id="list"></div>
+
+  <section class="ask" id="ask">
+    <h2>お店で聞くこと</h2>
+    <p>お店で、そのまま読んで使えます。上の「ハイブリッド車」「ローンで買う」に合わせて、出てくる質問が変わります。</p>
+    <div id="asklist"></div>
+  </section>
 
   <div class="note"><b>分からないときは、お店の人に聞くのが一番です。</b>このチェックリストは判断の手がかりです。安全に関わる部分は、最後はお店や整備士に確かめてください。</div>
 
@@ -112,7 +145,7 @@ const DATA=[
  {sec:"外まわり",items:[
   {id:"tosou",t:"色を塗り直したところ",s:"ぶつけて直した場所が分かる",why:"色を塗り直した場所は、ぶつけたり、こすったりして直した場所のことが多いため。どこを直したかが分かると、その車の使われ方が見えてくる",how:"① 明るい場所で、車の横から斜めに見る。となりの部品と色やツヤがちがう所がないか探す<br>② 車両検査証明書（鑑定書）があれば、車の絵に書いてある記号を見る。記号の意味が分からなければ、お店の人に「この記号は何ですか」と聞く"},
   {id:"tire",t:"タイヤの製造年",s:"溝の深さとあわせて",why:"古いタイヤは、溝が残っていても、ゴムが硬くなっていたり、ヒビが大きかったりするため",how:"タイヤの横に書いてある4ケタの数字を見る（下の図）。前の2ケタが「週」、後ろの2ケタが「年」。片側にしか書いていないこともあるので、見つからなければ反対側も見る。<br><b>作り始めてから6年ほどたっていたら「古い」</b>と見て、ゴムの硬さとヒビを確かめる（作者の基準）<br>参考：日本自動車タイヤ協会は、使って5年以上のタイヤはお店での点検を、作って10年たったタイヤは交換をすすめている",fig:`<svg class="fig" viewBox="0 0 320 170" role="img" aria-label="タイヤの横にある製造年の数字の読み方。2523なら2023年の25週目"><path class="f-tire" d="M0 72 Q160 44 320 72 L320 170 L0 170 Z"/><text class="f-small" x="20" y="118">DOT</text><text class="f-small" x="62" y="118">XX XX XXX</text><rect class="f-ring" x="176" y="94" width="72" height="34" rx="17"/><text class="f-num" x="212" y="118" text-anchor="middle">2523</text><line class="f-line" x1="196" y1="94" x2="120" y2="36"/><line class="f-line" x1="230" y1="94" x2="262" y2="36"/><text class="f-lab" x="110" y="26" text-anchor="middle">25 → 25週目（6月ごろ）</text><text class="f-lab" x="262" y="26" text-anchor="middle">23 → 2023年</text><text class="f-small" x="160" y="156" text-anchor="middle">タイヤの横（側面）</text></svg>`},
-  {id:"custom",t:"カスタムパーツの場所",s:"違法改造ではないか・フィルム",why:"",why:"法律（保安基準）に合わない改造の車は、車検に通らない。街頭検査で見つかると、使う人に整備命令が出ることがあり、従わないと罰金の対象になるため",how:"① 違法改造車ではないかを確かめる<br>② 窓にフィルムが貼られているかを確かめる<br>③ 気になるところがあれば、お店の人に「このまま車検に通りますか」と聞く<br><b>気をつける：「現状渡し」の車</b><br>自社ローンなどで売られている車には、「現状渡し」（今の状態のまま渡す）という売り方がある。このときは、お店の人もフィルムが貼られていることに気づいていない（または伝えていない）ことがある。前の窓・運転席と助手席の窓にフィルムがないか、自分でも確かめる<br><b>見た目では気づきにくい：運転席と助手席のフィルム</b><br>薄いフィルムが貼られていることがあり、見ただけでは分かりにくい（作者も実際に気づかなかった）<br>確かめ方：窓を少し下げて、ガラスの上の縁に爪をそっと当てる。フィルムのわずかな厚みで、引っかかりがあればフィルムが貼られている<br>・ガラスがきれいな状態で確かめる。汚れでも引っかかることがあるため<br>・傷つけないように、力を入れすぎない<br>・お店の人にひと言断ってから触る",fig:`<div class="mini"><p class="mini-t">よく問題になるところ（法律の決まり）</p><table><tr><th>場所</th><th>決まり</th></tr><tr><td>前の窓・運転席と助手席の窓のフィルム</td><td>フィルムを貼った状態で、光を通す割合が70%以上。古くなると割合が下がり、車検に通らないこともある</td></tr><tr><td>後ろの窓のフィルム</td><td>この決まりの対象外</td></tr><tr><td>車高（最低地上高）</td><td>地面から9cm以上（樹脂のエアロなど、除かれる部品もある）</td></tr><tr><td>マフラー</td><td>基準に合わないマフラーや、切った・外したマフラーは不正改造</td></tr><tr><td>タイヤ</td><td>車体からはみ出すタイヤは不正改造</td></tr></table><p class="mini-s">出どころ：国土交通省の告示・資料、自動車の解説記事（2026年11月に確認）。ここにない改造もあるので、最後はお店や整備工場で確かめてください</p></div>`}
+  {id:"custom",t:"カスタムパーツの場所",s:"違法改造ではないか・フィルム",why:"法律（保安基準）に合わない改造の車は、車検に通らない。街頭検査で見つかると、使う人に整備命令が出ることがあり、従わないと罰金の対象になるため",how:"① 違法改造車ではないかを確かめる<br>② 窓にフィルムが貼られているかを確かめる<br>③ 気になるところがあれば、お店の人に「このまま車検に通りますか」と聞く<br><b>気をつける：「現状渡し」の車</b><br>自社ローンなどで売られている車には、「現状渡し」（今の状態のまま渡す）という売り方がある。このときは、お店の人もフィルムが貼られていることに気づいていない（または伝えていない）ことがある。前の窓・運転席と助手席の窓にフィルムがないか、自分でも確かめる<br><b>見た目では気づきにくい：運転席と助手席のフィルム</b><br>薄いフィルムが貼られていることがあり、見ただけでは分かりにくい（作者も実際に気づかなかった）<br>確かめ方：窓を少し下げて、ガラスの上の縁に爪をそっと当てる。フィルムのわずかな厚みで、引っかかりがあればフィルムが貼られている<br>・ガラスがきれいな状態で確かめる。汚れでも引っかかることがあるため<br>・傷つけないように、力を入れすぎない<br>・お店の人にひと言断ってから触る",fig:`<div class="mini"><p class="mini-t">よく問題になるところ（法律の決まり）</p><table><tr><th>場所</th><th>決まり</th></tr><tr><td>前の窓・運転席と助手席の窓のフィルム</td><td>フィルムを貼った状態で、光を通す割合が70%以上。古くなると割合が下がり、車検に通らないこともある</td></tr><tr><td>後ろの窓のフィルム</td><td>この決まりの対象外</td></tr><tr><td>車高（最低地上高）</td><td>地面から9cm以上（樹脂のエアロなど、除かれる部品もある）</td></tr><tr><td>マフラー</td><td>基準に合わないマフラーや、切った・外したマフラーは不正改造</td></tr><tr><td>タイヤ</td><td>車体からはみ出すタイヤは不正改造</td></tr></table><p class="mini-s">出どころ：国土交通省の告示・資料、自動車の解説記事（2026年11月に確認）。ここにない改造もあるので、最後はお店や整備工場で確かめてください</p></div>`}
  ]},
  {sec:"車の中",items:[
   {id:"smoke",t:"禁煙車か",s:"においと黄ばみで見る",why:"",how:"① ドアを開けて、タバコのにおいがしないかかぐ<br>② 分からなければ、天井の内側やシートに顔を近づけて、においをかぐ<br>③ エアコンをつけて、出てくる風のにおいもかぐ<br>④ 天井などに、しみついた黄ばみがないか見る"},
@@ -135,6 +168,16 @@ try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s)st=Object.assign(
 function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
 const list=document.getElementById("list");
 function visible(it){return (!it.hv||st.hv)&&(!it.loan||st.loan);}
+const GLOSS=[["ウォッシャー液","フロントガラスに吹きかけて汚れを落とす液"],["整備記録簿","点検や整備で何をしたか、どの部品をいつ交換したかが書かれた記録"],["自社ローン","ローン会社を通さず、お店が自分で分割払いを受ける売り方"],["フルローン","頭金を入れずに、車の代金を全部ローンで払うこと"],["現状渡し","整備や修理をせずに、今の状態のまま車を渡す売り方"],["法定費用","車検のときに必ずかかる税金や保険料（重量税、自賠責保険など）"],["保安基準","車が守らないといけない、国の決まり"],["社外ナビ","車のメーカー以外の会社が作ったナビ"],["修復歴","車の骨格（フレームやピラーなど）を直したり交換したりした記録"],["鑑定書","車の状態を調べて、評価や直した場所を書いた書類。お店によって呼び方が違う"],["保証人","払えなくなったときに、代わりに払う約束をする人"],["乳化","オイルに水分が混ざって、白っぽくにごること"],["車検","車が国の決まりに合っているかを調べる検査。合格すると、決まった期間、道路を走れる"]];
+const GMAP=Object.fromEntries(GLOSS);
+function deco(html,used,skip){return html.split(/(<[^>]+>)/).map(part=>{if(part.startsWith("<"))return part;GLOSS.forEach(([w])=>{if(used.has(w)||skip.includes(w))return;const i=part.indexOf(w);if(i<0)return;used.add(w);part=part.slice(0,i)+"\u0000"+w+"\u0001"+part.slice(i+w.length);});return part.replace(/\u0000([^\u0001]+)\u0001/g,'<button type="button" class="term" data-w="$1">$1</button>');}).join("");}
+const ASK=[{g:"書類・お店に聞くこと",q:[["修復歴はありますか","鑑定書が車にないとき"],["次の車検で交換が必要な部品はありますか","車検の残りが短いとき"],["車検の費用は、展示している金額に入っていますか","車検が切れているとき"],["金利は何%ですか。どの種類のローンですか","ローンで買うとき",{loan:true}],["メインバッテリーを交換した記録（保証書や整備記録簿）はありますか","ハイブリッド車のとき",{hv:true}]]},
+{g:"外まわり",q:[["この記号は何ですか","鑑定書の車の絵の記号が分からないとき"],["このまま車検に通りますか","改造やフィルムが気になるとき"],["窓を触って確かめてもいいですか","フィルムを爪で確かめる前に"]]},
+{g:"車の中",q:[["ナビを外すための専用のボルトはありますか","あとでナビを替えたいとき"]]},
+{g:"下回り",q:[["前はどんな使われ方をしていた車ですか","走行距離だけで決めたくないとき"]]},
+{g:"消耗品",q:[["ウォッシャー液を出してもいいですか","ワイパーを確かめる前に"],["整備記録簿を見せてもらえますか","ブレーキパッドの交換の時期を見るとき"],["納車のときにオイルを交換してもらえますか","交換が半年より前のとき"],["ブレーキパッドはあとどれくらい残っていますか","交換の時期が気になるとき"]]}];
+function renderAsk(){const box=document.getElementById("asklist");box.innerHTML="";ASK.forEach(g=>{const qs=g.q.filter(q=>visible(q[2]||{}));if(!qs.length)return;const h=document.createElement("h3");h.textContent=g.g;box.appendChild(h);const ul=document.createElement("ul");qs.forEach(([q,w])=>{const li=document.createElement("li");const b=document.createElement("b");b.textContent="「"+q+"」";const sp=document.createElement("span");sp.textContent=w;li.append(b,sp);ul.appendChild(li);});box.appendChild(ul);});}
+list.addEventListener("click",e=>{const t=e.target.closest(".term");if(!t)return;const body=t.closest(".body");let box=body.querySelector(".defbox");const w=t.dataset.w;if(box&&box.dataset.w===w){box.remove();return;}if(!box){box=document.createElement("div");box.className="defbox";body.appendChild(box);}box.dataset.w=w;box.innerHTML="";const b=document.createElement("b");b.textContent=w;box.append(b,"："+GMAP[w]);});
 function render(){
   list.innerHTML="";let total=0,done=0;
   DATA.forEach(g=>{
@@ -149,7 +192,7 @@ function render(){
         <label class="t" for="c-${it.id}"><b>${it.t}</b>${it.s?`<span>${it.s}</span>`:""}</label>
         <button class="more" type="button" aria-expanded="${open}">${open?"閉じる":"見方"}</button></div>
         <div class="body" ${open?"":"hidden"}>
-          ${(it.why||it.how)?`<dl>${it.why?`<dt>なぜ</dt><dd>${it.why}</dd>`:""}${it.how?`<dt>どう</dt><dd>${it.how}</dd>`:""}</dl>`:""}
+          ${(it.why||it.how)?(()=>{const u=new Set();return `<dl>${it.why?`<dt>なぜ</dt><dd>${deco(it.why,u,it.t)}</dd>`:""}${it.how?`<dt>どう</dt><dd>${deco(it.how,u,it.t)}</dd>`:""}</dl>`;})():""}
           ${it.fig||""}
           ${it.todo?`<span class="todo">くわしい見方は、これから追加します</span>`:""}
         </div>`;
@@ -161,6 +204,7 @@ function render(){
   });
   document.getElementById("count").textContent=`${done} / ${total}`;
   document.getElementById("bar").style.width=total?`${done/total*100}%`:"0";
+  renderAsk();
 }
 const hv=document.getElementById("opt-hv"),loan=document.getElementById("opt-loan");
 hv.checked=st.hv;loan.checked=st.loan;
