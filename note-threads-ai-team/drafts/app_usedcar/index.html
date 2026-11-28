@@ -77,6 +77,15 @@ section h2 small{font-family:var(--body);font-weight:500;font-size:.85rem;color:
 .ask li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
 .ask li b{display:block;font-size:1rem}
 .ask li span{font-size:.82rem;color:var(--muted)}
+.gnote{margin:-4px 0 0;font-size:.85rem;color:var(--muted)}
+.cat{display:block;font-style:normal;font-size:.72rem;color:var(--teal);margin-top:2px}
+.sumsec{display:flex;flex-direction:column;gap:8px}
+.sumsec h2{font-family:var(--display);font-size:1.15rem;margin:8px 0 0;color:var(--navy)}
+.sumsec p{margin:0;font-size:.9rem;color:var(--muted)}
+#sum table{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:.88rem;table-layout:fixed}
+#sum th{background:var(--navy);color:#fff;padding:8px;text-align:left;font-weight:700}
+#sum td{padding:7px 8px;border-top:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
+#sum td.ok{color:var(--teal);font-weight:700}
 .todo{font-size:.82rem;color:var(--warn);background:var(--warn-soft);border-radius:6px;padding:4px 8px;align-self:flex-start}
 .note{background:var(--teal-soft);border-radius:12px;padding:14px;font-size:.9rem}
 .note b{color:var(--navy)}
@@ -118,6 +127,12 @@ footer{font-size:.8rem;color:var(--muted)}
   <div class="note"><b>車によって、見るところは変わります。</b>ハイブリッド車やローンで買う場合は、上のチェックを入れると、その項目が出てきます。</div>
 
   <div id="list"></div>
+
+  <section class="sumsec">
+    <h2>まとめ：チェックの一覧</h2>
+    <p>見終わったところには ✓ が付きます。お店を出る前に、見落としがないか確かめてください。</p>
+    <div id="sum"></div>
+  </section>
 
   <section class="ask" id="ask">
     <h2>お店で聞くこと</h2>
@@ -166,6 +181,8 @@ const DATA=[
   {id:"pad",t:"ブレーキパッド",s:"整備記録簿で見る",why:"",how:"① 整備記録簿を見せてもらう<br>② ブレーキパッドを最後に交換したのはいつか。どの車検のときに交換したかを確かめる<br>③ その車検から、何キロ走っているかを確かめる（今のメーターと比べる）<br>何キロで交換が必要かは、車や乗り方で変わるので、一律には言えない。気になれば、お店の人に「ブレーキパッドはあとどれくらい残っていますか」と聞く"}
  ]}
 ];
+const GROUPS=[{sec:"基本（まず見るところ）",note:"どの車でも、必ず見るところ",ids:["shufuku","kyori","sougaku","hosho","shaken","naiso","tire","oil","kinri"]},{sec:"見落としがち（現場の目線）",note:"初めての人が気づきにくいところ",ids:["tosou","custom","sabi","kankyo","smoke","navi","wiper","battery","pad","hvbat"]}];
+const BYID={};DATA.forEach(g=>g.items.forEach(it=>{it.cat=g.sec;BYID[it.id]=it;}));
 const KEY="usedcar-checklist-v1";
 let st={checked:{},hv:false,loan:false,open:{}};
 try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s)st=Object.assign(st,s);}catch(e){}
@@ -182,18 +199,19 @@ const ASK=[{g:"書類・お店に聞くこと",q:[["修復歴はありますか"
 {g:"消耗品",q:[["ウォッシャー液を出してもいいですか","ワイパーを確かめる前に"],["整備記録簿を見せてもらえますか","ブレーキパッドの交換の時期を見るとき"],["納車のときにオイルを交換してもらえますか","交換が半年より前のとき"],["ブレーキパッドはあとどれくらい残っていますか","交換の時期が気になるとき"]]}];
 function renderAsk(){const box=document.getElementById("asklist");box.innerHTML="";ASK.forEach(g=>{const qs=g.q.filter(q=>visible(q[2]||{}));if(!qs.length)return;const h=document.createElement("h3");h.textContent=g.g;box.appendChild(h);const ul=document.createElement("ul");qs.forEach(([q,w])=>{const li=document.createElement("li");const b=document.createElement("b");b.textContent="「"+q+"」";const sp=document.createElement("span");sp.textContent=w;li.append(b,sp);ul.appendChild(li);});box.appendChild(ul);});}
 list.addEventListener("click",e=>{const t=e.target.closest(".term");if(!t)return;const body=t.closest(".body");let box=body.querySelector(".defbox");const w=t.dataset.w;if(box&&box.dataset.w===w){box.remove();return;}if(!box){box=document.createElement("div");box.className="defbox";body.appendChild(box);}box.dataset.w=w;box.innerHTML="";const b=document.createElement("b");b.textContent=w;box.append(b,"："+GMAP[w]);});
+function renderSum(){const box=document.getElementById("sum");box.innerHTML="";const tb=document.createElement("table");const cols=GROUPS.map(g=>g.ids.map(i=>BYID[i]).filter(visible));const tr0=document.createElement("tr");GROUPS.forEach(g=>{const th=document.createElement("th");th.textContent=g.sec.replace(/（.*/,"");tr0.appendChild(th);});tb.appendChild(tr0);const n=Math.max(...cols.map(c=>c.length));for(let r=0;r<n;r++){const tr=document.createElement("tr");cols.forEach(c=>{const td=document.createElement("td");const it=c[r];if(it){td.textContent=(st.checked[it.id]?"✓ ":"□ ")+it.t;if(st.checked[it.id])td.className="ok";}tr.appendChild(td);});tb.appendChild(tr);}box.appendChild(tb);}
 function render(){
   list.innerHTML="";let total=0,done=0;
-  DATA.forEach(g=>{
-    const its=g.items.filter(visible);if(!its.length)return;
+  GROUPS.forEach(g=>{
+    const its=g.ids.map(i=>BYID[i]).filter(visible);if(!its.length)return;
     const sec=document.createElement("section");
     const d=its.filter(i=>st.checked[i.id]).length;total+=its.length;done+=d;
-    sec.innerHTML=`<h2>${g.sec}<small>${d} / ${its.length}</small></h2>`;
+    sec.innerHTML=`<h2>${g.sec}<small>${d} / ${its.length}</small></h2><p class="gnote">${g.note}</p>`;
     its.forEach(it=>{
       const el=document.createElement("div");el.className="item"+(st.checked[it.id]?" done":"");
       const open=!!st.open[it.id];
       el.innerHTML=`<div class="head"><input type="checkbox" id="c-${it.id}" ${st.checked[it.id]?"checked":""} aria-label="${it.t}">
-        <label class="t" for="c-${it.id}"><b>${it.t}</b>${it.s?`<span>${it.s}</span>`:""}</label>
+        <label class="t" for="c-${it.id}"><b>${it.t}</b>${it.s?`<span>${it.s}</span>`:""}<em class="cat">${it.cat}</em></label>
         <button class="more" type="button" aria-expanded="${open}">${open?"閉じる":"見方"}</button></div>
         <div class="body" ${open?"":"hidden"}>
           ${(it.why||it.how)?(()=>{const u=new Set();return `<dl>${it.why?`<dt>なぜ</dt><dd>${deco(it.why,u,it.t)}</dd>`:""}${it.how?`<dt>どう</dt><dd>${deco(it.how,u,it.t)}</dd>`:""}</dl>`;})():""}
@@ -209,6 +227,7 @@ function render(){
   document.getElementById("count").textContent=`${done} / ${total}`;
   document.getElementById("bar").style.width=total?`${done/total*100}%`:"0";
   renderAsk();
+  renderSum();
 }
 const hv=document.getElementById("opt-hv"),loan=document.getElementById("opt-loan");
 hv.checked=st.hv;loan.checked=st.loan;
